@@ -1,7 +1,11 @@
 if !empty($TMPDIR)
     let s:tmp = "$TMPDIR"
 else
-    let s:tmp = '/tmp'
+    if has("mac")
+        let s:tmp = '/private/var/folders'
+    else
+        let s:tmp = '/tmp'
+    endif
 endif
 
 execute "au BufNewFile,BufRead " . s:tmp . "/*/new-commit setfiletype arcanistdiff"
